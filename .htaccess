@@ -1,0 +1,30 @@
+
+# php -- BEGIN cPanel-generated handler, do not edit
+# This domain inherits the “PHP” package.
+# php -- END cPanel-generated handler, do not edit
+
+# Rutland Driveways: one canonical host https://www.rutlanddriveways.co.uk
+# Every rule is limited to this domain so the add-on sites in subfolders are not affected.
+RewriteEngine On
+RewriteCond %{HTTP_HOST} ^rutlanddriveways\.co\.uk$ [NC]
+RewriteRule ^(.*)$ https://www.rutlanddriveways.co.uk/$1 [L,R=301]
+RewriteCond %{HTTP_HOST} ^www\.rutlanddriveways\.co\.uk$ [NC]
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://www.rutlanddriveways.co.uk/$1 [L,R=301]
+RewriteCond %{HTTP_HOST} ^(www\.)?rutlanddriveways\.co\.uk$ [NC]
+RewriteCond %{THE_REQUEST} \s/index\.html[\s?] [NC]
+RewriteRule ^index\.html$ https://www.rutlanddriveways.co.uk/ [L,R=301]
+
+ErrorDocument 404 /404.html
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType text/html "access plus 1 hour"
+</IfModule>
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css application/javascript application/xml image/svg+xml
+</IfModule>
