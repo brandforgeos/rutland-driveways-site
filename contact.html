@@ -96,6 +96,9 @@ function sendEnquiry(){
   if(!name){show('Please add your name so we know who we are talking to.');return;}
   if(!phone && !email){show('Please add a phone number or email so we can get back to you.');return;}
   var original=btn.textContent; btn.disabled=true; btn.textContent='Sending…'; status.style.display='none';
+  /* the enquiry also goes straight into Build Bro Hub (the Web3Forms email below still goes as a backup) */
+  try{var hb=JSON.stringify({c:'RD',name:name,phone:phone,email:email,location:g('f4'),service:g('f5'),message:g('f6'),letter_reference:window.__letterRef||''});
+    if(!(navigator.sendBeacon&&navigator.sendBeacon('https://bjkjmdqytughwczpzgac.supabase.co/functions/v1/enquiry',new Blob([hb],{type:'text/plain'}))))fetch('https://bjkjmdqytughwczpzgac.supabase.co/functions/v1/enquiry',{method:'POST',body:hb,keepalive:true,headers:{'Content-Type':'text/plain'}});}catch(e){}
   var payload={access_key:'341f5a17-8913-4ac1-b2e4-7e4e91e9f3de',subject:'Website enquiry'+(g('f4')?(' - '+g('f4')):''),from_name:'Rutland Driveways website',name:name,phone:phone,property_location:g('f4'),service:g('f5'),message:g('f6')};
   if(email){payload.email=email; payload.replyto=email;}
   if(window.__letterRef){payload.letter_reference=window.__letterRef; payload.subject='Letter enquiry '+window.__letterRef+' - '+(g('f4')||name); window.__letterTrack('enquiry',{name:name,postcode:g('f4')});}
