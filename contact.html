@@ -8,6 +8,7 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'AW-11358226147');
+  document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href^="tel:"]');if(a)gtag('event','conversion',{'send_to':'AW-11358226147/6ehBCNniuKEdEOONg6gq'});});
 </script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -104,7 +105,7 @@ function sendEnquiry(){
   if(window.__letterRef){payload.letter_reference=window.__letterRef; payload.subject='Letter enquiry '+window.__letterRef+' - '+(g('f4')||name); window.__letterTrack('enquiry',{name:name,postcode:g('f4')});}
   fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(payload)})
   .then(function(r){return r.json();}).then(function(data){
-    if(data.success){document.getElementById('enqform').innerHTML='<h3>Thank you, your enquiry is on its way.</h3><p>We will be in touch, usually the same day, to arrange a site visit. If it is urgent, call us on <a href="tel:+441572344119">01572 344119</a>.</p>';}
+    if(data.success){try{gtag('event','conversion',{'send_to':'AW-11358226147/9cmWCJSysKEdEOONg6gq'});}catch(e){}document.getElementById('enqform').innerHTML='<h3>Thank you, your enquiry is on its way.</h3><p>We will be in touch, usually the same day, to arrange a site visit. If it is urgent, call us on <a href="tel:+441572344119">01572 344119</a>.</p>';}
     else{btn.disabled=false;btn.textContent=original;show('Sorry, that did not send. Please call us on 01572 344119 or email info@rutlanddriveways.co.uk.');}
   }).catch(function(){btn.disabled=false;btn.textContent=original;show('Could not send right now. Please call us on 01572 344119 or email info@rutlanddriveways.co.uk.');});
 }
